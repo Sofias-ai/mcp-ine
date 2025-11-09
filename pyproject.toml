@@ -3,13 +3,12 @@ name = "mcp-ine"
 version = "0.1.0"
 description = "MCP Server for INE (Spanish Statistical Office) public data API - Access 109+ statistical operations"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.10"
 keywords = ["mcp", "ine", "statistics", "spain", "data", "api", "model-context-protocol"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
