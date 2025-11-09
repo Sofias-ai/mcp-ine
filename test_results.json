@@ -1,0 +1,611 @@
+{
+  "timestamp": "2025-11-09T11:45:18.311518",
+  "total": 100,
+  "passed": 100,
+  "failed": 0,
+  "success_rate": "100.0%",
+  "duration": "42.33s",
+  "results": [
+    {
+      "test": 1,
+      "name": "Listar todas las operaciones disponibles",
+      "status": "PASS",
+      "duration": 0.15354061126708984
+    },
+    {
+      "test": 2,
+      "name": "Verificar que retorna más de 100 operaciones",
+      "status": "PASS",
+      "duration": 0.15197181701660156
+    },
+    {
+      "test": 3,
+      "name": "Verificar estructura de cada operación (Id, Codigo, Nombre)",
+      "status": "PASS",
+      "duration": 0.15685367584228516
+    },
+    {
+      "test": 4,
+      "name": "Verificar que operaciones tienen código IOE",
+      "status": "PASS",
+      "duration": 0.3369436264038086
+    },
+    {
+      "test": 5,
+      "name": "Verificar IDs son únicos",
+      "status": "PASS",
+      "duration": 0.14351248741149902
+    },
+    {
+      "test": 6,
+      "name": "Filtrar operaciones por 'IPC'",
+      "status": "PASS",
+      "duration": 0.16621088981628418
+    },
+    {
+      "test": 7,
+      "name": "Filtrar operaciones por 'población'",
+      "status": "PASS",
+      "duration": 0.14852213859558105
+    },
+    {
+      "test": 8,
+      "name": "Filtrar operaciones por 'EPA'",
+      "status": "PASS",
+      "duration": 0.19714045524597168
+    },
+    {
+      "test": 9,
+      "name": "Filtrar operaciones por 'vivienda'",
+      "status": "PASS",
+      "duration": 0.16989421844482422
+    },
+    {
+      "test": 10,
+      "name": "Filtrar operaciones inexistentes retorna lista vacía",
+      "status": "PASS",
+      "duration": 0.1582634449005127
+    },
+    {
+      "test": 11,
+      "name": "Filtro case-insensitive funciona correctamente",
+      "status": "PASS",
+      "duration": 0.21395564079284668
+    },
+    {
+      "test": 12,
+      "name": "Filtro con espacios funciona",
+      "status": "PASS",
+      "duration": 0.1513056755065918
+    },
+    {
+      "test": 13,
+      "name": "Filtro con caracteres especiales",
+      "status": "PASS",
+      "duration": 0.1650388240814209
+    },
+    {
+      "test": 14,
+      "name": "Operación IPC existe en la lista",
+      "status": "PASS",
+      "duration": 0.1569993495941162
+    },
+    {
+      "test": 15,
+      "name": "Operación IPV (vivienda) existe",
+      "status": "PASS",
+      "duration": 0.14944672584533691
+    },
+    {
+      "test": 16,
+      "name": "Todos los códigos son strings no vacíos",
+      "status": "PASS",
+      "duration": 0.1513671875
+    },
+    {
+      "test": 17,
+      "name": "Todos los nombres son strings no vacíos",
+      "status": "PASS",
+      "duration": 0.15220928192138672
+    },
+    {
+      "test": 18,
+      "name": "Todas las URLs son válidas",
+      "status": "PASS",
+      "duration": 0.15702009201049805
+    },
+    {
+      "test": 19,
+      "name": "IDs son enteros positivos",
+      "status": "PASS",
+      "duration": 0.15241050720214844
+    },
+    {
+      "test": 20,
+      "name": "Retorno es JSON serializable",
+      "status": "PASS",
+      "duration": 0.14586830139160156
+    },
+    {
+      "test": 21,
+      "name": "Obtener tablas de IPC",
+      "status": "PASS",
+      "duration": 0.6801681518554688
+    },
+    {
+      "test": 22,
+      "name": "IPC tiene más de 10 tablas",
+      "status": "PASS",
+      "duration": 0.5517845153808594
+    },
+    {
+      "test": 23,
+      "name": "Tablas IPC tienen estructura correcta (Id, Nombre)",
+      "status": "PASS",
+      "duration": 0.554462194442749
+    },
+    {
+      "test": 24,
+      "name": "Tablas IPC tienen código",
+      "status": "PASS",
+      "duration": 0.6316735744476318
+    },
+    {
+      "test": 25,
+      "name": "Tablas IPC tienen periodicidad",
+      "status": "PASS",
+      "duration": 0.5742642879486084
+    },
+    {
+      "test": 26,
+      "name": "Obtener tablas de IPV",
+      "status": "PASS",
+      "duration": 0.5347297191619873
+    },
+    {
+      "test": 27,
+      "name": "IPV tiene al menos 5 tablas",
+      "status": "PASS",
+      "duration": 0.7016136646270752
+    },
+    {
+      "test": 28,
+      "name": "Tabla 25171 existe en IPV",
+      "status": "PASS",
+      "duration": 0.545936107635498
+    },
+    {
+      "test": 29,
+      "name": "Tablas IPV son trimestrales (periodicidad 3)",
+      "status": "PASS",
+      "duration": 0.5981907844543457
+    },
+    {
+      "test": 30,
+      "name": "Tablas IPV tienen metadatos",
+      "status": "PASS",
+      "duration": 0.6960289478302002
+    },
+    {
+      "test": 31,
+      "name": "Obtener tablas de EPA",
+      "status": "PASS",
+      "duration": 1.0646510124206543
+    },
+    {
+      "test": 32,
+      "name": "EPA retorna tablas válidas",
+      "status": "PASS",
+      "duration": 1.1997196674346924
+    },
+    {
+      "test": 33,
+      "name": "IDs de tablas EPA son únicos",
+      "status": "PASS",
+      "duration": 1.0568573474884033
+    },
+    {
+      "test": 34,
+      "name": "Nombres de tablas EPA no están vacíos",
+      "status": "PASS",
+      "duration": 1.2957916259765625
+    },
+    {
+      "test": 35,
+      "name": "Códigos de tablas EPA son válidos",
+      "status": "PASS",
+      "duration": 0.8022222518920898
+    },
+    {
+      "test": 36,
+      "name": "Operación inexistente maneja error correctamente",
+      "status": "PASS",
+      "duration": 0.13749408721923828
+    },
+    {
+      "test": 37,
+      "name": "Código vacío maneja error",
+      "status": "PASS",
+      "duration": 0.14303350448608398
+    },
+    {
+      "test": 38,
+      "name": "Multiple operaciones funcionan en secuencia",
+      "status": "PASS",
+      "duration": 2.070359230041504
+    },
+    {
+      "test": 39,
+      "name": "Resultado es JSON serializable",
+      "status": "PASS",
+      "duration": 0.6985318660736084
+    },
+    {
+      "test": 40,
+      "name": "Tablas mantienen consistencia entre llamadas",
+      "status": "PASS",
+      "duration": 1.175513505935669
+    },
+    {
+      "test": 41,
+      "name": "Obtener datos de tabla IPC (50902)",
+      "status": "PASS",
+      "duration": 0.7904374599456787
+    },
+    {
+      "test": 42,
+      "name": "Datos tienen estructura de series",
+      "status": "PASS",
+      "duration": 0.7994277477264404
+    },
+    {
+      "test": 43,
+      "name": "Series tienen nombre",
+      "status": "PASS",
+      "duration": 0.7517027854919434
+    },
+    {
+      "test": 44,
+      "name": "Series tienen datos no vacíos",
+      "status": "PASS",
+      "duration": 0.7597887516021729
+    },
+    {
+      "test": 45,
+      "name": "Puntos de datos tienen Fecha y Valor",
+      "status": "PASS",
+      "duration": 0.7686264514923096
+    },
+    {
+      "test": 46,
+      "name": "Obtener últimos 3 periodos",
+      "status": "PASS",
+      "duration": 0.11250042915344238
+    },
+    {
+      "test": 47,
+      "name": "Obtener últimos 12 periodos",
+      "status": "PASS",
+      "duration": 0.13594698905944824
+    },
+    {
+      "test": 48,
+      "name": "Filtro por tipo de periodo 'M' (mensual)",
+      "status": "PASS",
+      "duration": 0.7885081768035889
+    },
+    {
+      "test": 49,
+      "name": "Filtro por tipo de periodo 'A' (anual)",
+      "status": "PASS",
+      "duration": 0.8811318874359131
+    },
+    {
+      "test": 50,
+      "name": "Nivel de detalle 2",
+      "status": "PASS",
+      "duration": 2.0633602142333984
+    },
+    {
+      "test": 51,
+      "name": "Obtener datos de IPV tabla 25171",
+      "status": "PASS",
+      "duration": 2.1332128047943115
+    },
+    {
+      "test": 52,
+      "name": "IPV últimos 2 trimestres",
+      "status": "PASS",
+      "duration": 0.13593339920043945
+    },
+    {
+      "test": 53,
+      "name": "IPV contiene datos de País Vasco",
+      "status": "PASS",
+      "duration": 0.13546156883239746
+    },
+    {
+      "test": 54,
+      "name": "Datos IPV tienen índices numéricos",
+      "status": "PASS",
+      "duration": 0.134979248046875
+    },
+    {
+      "test": 55,
+      "name": "Fechas son timestamps válidos",
+      "status": "PASS",
+      "duration": 0.13727951049804688
+    },
+    {
+      "test": 56,
+      "name": "Rango de fechas 2024",
+      "status": "PASS",
+      "duration": 0.6560211181640625
+    },
+    {
+      "test": 57,
+      "name": "Rango de fechas 2023-2024",
+      "status": "PASS",
+      "duration": 0.16712307929992676
+    },
+    {
+      "test": 58,
+      "name": "Rango de fechas último trimestre",
+      "status": "PASS",
+      "duration": 0.4983081817626953
+    },
+    {
+      "test": 59,
+      "name": "Combinación: últimos periodos + tipo",
+      "status": "PASS",
+      "duration": 0.5278429985046387
+    },
+    {
+      "test": 60,
+      "name": "Todas las series tienen unidad",
+      "status": "PASS",
+      "duration": 0.34764885902404785
+    },
+    {
+      "test": 61,
+      "name": "Series tienen código único",
+      "status": "PASS",
+      "duration": 0.1124579906463623
+    },
+    {
+      "test": 62,
+      "name": "Datos tienen fechas válidas",
+      "status": "PASS",
+      "duration": 0.3063340187072754
+    },
+    {
+      "test": 63,
+      "name": "Tabla inexistente maneja error",
+      "status": "PASS",
+      "duration": 0.4352409839630127
+    },
+    {
+      "test": 64,
+      "name": "Resultado es JSON serializable",
+      "status": "PASS",
+      "duration": 0.11327266693115234
+    },
+    {
+      "test": 65,
+      "name": "Múltiples llamadas son consistentes",
+      "status": "PASS",
+      "duration": 0.22310543060302734
+    },
+    {
+      "test": 66,
+      "name": "Obtener serie con últimos datos",
+      "status": "PASS",
+      "duration": 0.21911382675170898
+    },
+    {
+      "test": 67,
+      "name": "Serie tiene código",
+      "status": "PASS",
+      "duration": 0.1716599464416504
+    },
+    {
+      "test": 68,
+      "name": "Serie tiene nombre",
+      "status": "PASS",
+      "duration": 0.19147419929504395
+    },
+    {
+      "test": 69,
+      "name": "Serie tiene datos o error manejado",
+      "status": "PASS",
+      "duration": 0.17705512046813965
+    },
+    {
+      "test": 70,
+      "name": "Serie retorna estructura válida",
+      "status": "PASS",
+      "duration": 0.193101167678833
+    },
+    {
+      "test": 71,
+      "name": "Serie con últimos 12 periodos",
+      "status": "PASS",
+      "duration": 0.1729295253753662
+    },
+    {
+      "test": 72,
+      "name": "Serie con últimos 6 periodos",
+      "status": "PASS",
+      "duration": 0.16491222381591797
+    },
+    {
+      "test": 73,
+      "name": "Serie tipo periodo mensual",
+      "status": "PASS",
+      "duration": 0.20909619331359863
+    },
+    {
+      "test": 74,
+      "name": "Serie tipo periodo anual",
+      "status": "PASS",
+      "duration": 0.15154051780700684
+    },
+    {
+      "test": 75,
+      "name": "Serie IPV (vivienda) con últimos datos",
+      "status": "PASS",
+      "duration": 0.23322129249572754
+    },
+    {
+      "test": 76,
+      "name": "Serie tiene metadatos",
+      "status": "PASS",
+      "duration": 0.1670835018157959
+    },
+    {
+      "test": 77,
+      "name": "Serie maneja parámetros correctamente",
+      "status": "PASS",
+      "duration": 0.16859054565429688
+    },
+    {
+      "test": 78,
+      "name": "Serie inexistente maneja error",
+      "status": "PASS",
+      "duration": 0.1474323272705078
+    },
+    {
+      "test": 79,
+      "name": "Resultado es JSON serializable",
+      "status": "PASS",
+      "duration": 0.1627190113067627
+    },
+    {
+      "test": 80,
+      "name": "Llamadas múltiples son consistentes",
+      "status": "PASS",
+      "duration": 0.20517635345458984
+    },
+    {
+      "test": 81,
+      "name": "Obtener variables de tabla 50902",
+      "status": "PASS",
+      "duration": 0.41650867462158203
+    },
+    {
+      "test": 82,
+      "name": "Variables tienen Id y Nombre",
+      "status": "PASS",
+      "duration": 0.35808873176574707
+    },
+    {
+      "test": 83,
+      "name": "Obtener variables de tabla IPV",
+      "status": "PASS",
+      "duration": 0.39900946617126465
+    },
+    {
+      "test": 84,
+      "name": "IDs de variables son únicos",
+      "status": "PASS",
+      "duration": 0.16583037376403809
+    },
+    {
+      "test": 85,
+      "name": "Tabla inexistente maneja error en variables",
+      "status": "PASS",
+      "duration": 0.28309011459350586
+    },
+    {
+      "test": 86,
+      "name": "Obtener valores de variable (si existe)",
+      "status": "PASS",
+      "duration": 0.3204169273376465
+    },
+    {
+      "test": 87,
+      "name": "Valores tienen estructura correcta",
+      "status": "PASS",
+      "duration": 0.2654874324798584
+    },
+    {
+      "test": 88,
+      "name": "Variable inexistente maneja error",
+      "status": "PASS",
+      "duration": 0.14157319068908691
+    },
+    {
+      "test": 89,
+      "name": "Resultado variables es JSON serializable",
+      "status": "PASS",
+      "duration": 0.17707610130310059
+    },
+    {
+      "test": 90,
+      "name": "Múltiples variables funcionan",
+      "status": "PASS",
+      "duration": 0.34246301651000977
+    },
+    {
+      "test": 91,
+      "name": "Buscar 'precios' (término más común)",
+      "status": "PASS",
+      "duration": 0.1665182113647461
+    },
+    {
+      "test": 92,
+      "name": "Buscar 'IPC' (código conocido)",
+      "status": "PASS",
+      "duration": 0.18719720840454102
+    },
+    {
+      "test": 93,
+      "name": "Buscar 'vivienda'",
+      "status": "PASS",
+      "duration": 0.1549396514892578
+    },
+    {
+      "test": 94,
+      "name": "Buscar con filtro de operación IPC",
+      "status": "PASS",
+      "duration": 0.15058469772338867
+    },
+    {
+      "test": 95,
+      "name": "Buscar con max_results=5",
+      "status": "PASS",
+      "duration": 0.16168427467346191
+    },
+    {
+      "test": 96,
+      "name": "Obtener últimos datos de IPC",
+      "status": "PASS",
+      "duration": 0.7048101425170898
+    },
+    {
+      "test": 97,
+      "name": "Obtener últimos datos de IPV",
+      "status": "PASS",
+      "duration": 0.6638436317443848
+    },
+    {
+      "test": 98,
+      "name": "Últimos datos con filtro de tabla",
+      "status": "PASS",
+      "duration": 0.7006616592407227
+    },
+    {
+      "test": 99,
+      "name": "Búsqueda retorna JSON serializable",
+      "status": "PASS",
+      "duration": 0.15999984741210938
+    },
+    {
+      "test": 100,
+      "name": "Últimos datos son JSON serializable",
+      "status": "PASS",
+      "duration": 0.6516234874725342
+    }
+  ],
+  "failed_tests": []
+}
