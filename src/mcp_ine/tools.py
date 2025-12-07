@@ -471,3 +471,225 @@ def Get_Latest_Data(operation_code: str, table_filter: Optional[str] = None) -> 
             })
     
     return results
+
+# =============================================================================
+# Censo 2021 (SDC21) Tools
+# =============================================================================
+
+from . import censo2021 as c21
+
+@mcp.tool()
+def Censo_List_Tables() -> Dict[str, Any]:
+    """List available tables in Spain's 2021 Census (Censo 2021)
+    
+    Available tables:
+    - hog: Hogares (Households)
+    - nuc: Parejas y otros núcleos familiares (Couples and family nuclei)
+    - per.estu: Personas en establecimientos colectivos (Persons in collective housing)
+    - per.ocu: Personas residentes en viviendas familiares (Persons in family dwellings)
+    - per.ppal: Total de Personas (All persons)
+    - viv.fam: Viviendas familiares (Dwellings)
+    - viv.ppal: Ocupados de 16 y más años (Employed persons aged 16+)
+    
+    Returns:
+        List of tables with id and descriptions in ES/EN
+    """
+    return c21.get_censo_tables()
+
+@mcp.tool()
+def Censo_List_Variables(tabla: Optional[str] = None) -> Dict[str, Any]:
+    """List available variables for Censo 2021 queries
+    
+    Variables are used to group/aggregate census data. Common variables include:
+    - ID_RESIDENCIA_N1/N2/N3: Geographic level (CCAA/Province/Municipality)
+    - ID_SEXO: Sex
+    - ID_EDAD: Age year by year
+    - ID_NACIONALIDAD_N1/N2/N3: Nationality (Spanish/Foreign, groups, country)
+    
+    Args:
+        tabla: Optional table ID to get recommended variables for that table
+    
+    Returns:
+        Dictionary of available variables organized by category
+    """
+    return c21.get_censo_variables(tabla)
+
+@mcp.tool()
+def Censo_Get_Data(
+    tabla: str,
+    variables: str,
+    metrica: Optional[str] = None,
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get census data from Censo 2021 with flexible grouping
+    
+    This is the main tool for querying Spain's 2021 Census. Specify a table and
+    grouping variables to aggregate census data.
+    
+    Args:
+        tabla: Table ID (hog, nuc, per.estu, per.ocu, per.ppal, viv.fam, viv.ppal)
+        variables: Comma-separated grouping variables (e.g., "ID_RESIDENCIA_N1,ID_SEXO")
+        metrica: Metric to use (auto-detected if not provided):
+                 - SPERSONAS: Count of persons
+                 - SHOGARES: Count of households
+                 - SVIVIENDAS: Count of dwellings
+                 - SNUCLEOS: Count of family nuclei
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Census data with metadata and data arrays
+    
+    Example:
+        Censo_Get_Data("per.ppal", "ID_RESIDENCIA_N1,ID_SEXO")
+        → Population by Autonomous Community and Sex
+    """
+    # Parse comma-separated variables into list
+    var_list = [v.strip() for v in variables.split(",") if v.strip()]
+    return c21.get_censo_data(tabla, var_list, metrica, idioma)
+
+@mcp.tool()
+def Censo_Population_By_Location(
+    level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get population by geographic level from Censo 2021
+    
+    Quick access to population counts by administrative division.
+    
+    Args:
+        level: Geographic level:
+               - N1: Comunidad Autónoma (Autonomous Community)
+               - N2: Provincia (Province)
+               - N3: Municipio (Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Population counts by location
+    """
+    return c21.get_population_by_location(level, idioma)
+
+@mcp.tool()
+def Censo_Population_Pyramid(
+    location_level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get population pyramid data (by age groups and sex)
+    
+    Returns population data broken down by 5-year age groups and sex,
+    suitable for building population pyramids.
+    
+    Args:
+        location_level: Geographic level for aggregation (N1=CCAA, N2=Province, N3=Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Population by age group and sex
+    """
+    return c21.get_population_pyramid(location_level, None, idioma)
+
+@mcp.tool()
+def Censo_Housing_By_Tenure(
+    location_level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get housing data by tenure status (owned, rented, etc.)
+    
+    Returns dwelling counts classified by tenure regime:
+    - En propiedad (Owned)
+    - En alquiler (Rented)
+    - Otro régimen de tenencia (Other tenure)
+    
+    Args:
+        location_level: Geographic level (N1=CCAA, N2=Province, N3=Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Housing counts by tenure status and location
+    """
+    return c21.get_housing_by_tenure(location_level, idioma)
+
+@mcp.tool()
+def Censo_Households_By_Size(
+    location_level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get households by size (number of members)
+    
+    Returns household counts by size: 1, 2, 3, 4, 5 or more persons.
+    
+    Args:
+        location_level: Geographic level (N1=CCAA, N2=Province, N3=Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Household counts by size and location
+    """
+    return c21.get_households_by_size(location_level, idioma)
+
+@mcp.tool()
+def Censo_Education_Level(
+    location_level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get population by education level
+    
+    Returns population counts by educational attainment level.
+    
+    Args:
+        location_level: Geographic level (N1=CCAA, N2=Province, N3=Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Population by education level and location
+    """
+    return c21.get_education_level(location_level, idioma)
+
+@mcp.tool()
+def Censo_Nationality(
+    level: int = 1,
+    location_level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get population by nationality
+    
+    Returns population counts by nationality/country of origin.
+    
+    Args:
+        level: Nationality detail level:
+               - 1: Spanish/Foreign (Española/Extranjera)
+               - 2: Large groups (Grandes grupos)
+               - 3: Country (País)
+        location_level: Geographic level (N1=CCAA, N2=Province, N3=Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Population by nationality and location
+    """
+    return c21.get_nationality_data(level, location_level, idioma)
+
+@mcp.tool()
+def Censo_Family_Nuclei(
+    include_type: bool = True,
+    location_level: str = "N1",
+    idioma: str = "ES"
+) -> Dict[str, Any]:
+    """Get family nuclei data
+    
+    Returns counts of family nuclei (couples with/without children, 
+    single parent families).
+    
+    Types of nuclei:
+    - Pareja sin hijos (Couple without children)
+    - Pareja con hijos (Couple with children)
+    - Progenitor 1 con hijo(s) (Single parent 1 with children)
+    - Progenitor 2 con hijo(s) (Single parent 2 with children)
+    
+    Args:
+        include_type: Include nucleus type grouping (default: True)
+        location_level: Geographic level (N1=CCAA, N2=Province, N3=Municipality)
+        idioma: Language ES or EN (default: ES)
+    
+    Returns:
+        Family nuclei counts by type and location
+    """
+    return c21.get_family_nuclei(include_type, location_level, idioma)

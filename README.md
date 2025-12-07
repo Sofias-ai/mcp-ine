@@ -4,9 +4,9 @@
 [![PyPI version](https://badge.fury.io/py/mcp-ine.svg)](https://badge.fury.io/py/mcp-ine)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-MCP Server for seamless integration with INE (Instituto Nacional de Estadística - Spanish Statistical Office) public data API. Access 109+ statistical operations including economic indicators, demographics, and social statistics through the Model Context Protocol.
+MCP Server for seamless integration with INE (Instituto Nacional de Estadística - Spanish Statistical Office) public data API. Access 109+ statistical operations including economic indicators, demographics, social statistics, and **Spain's 2021 Census (Censo 2021)** data through the Model Context Protocol.
 
-**Perfect for:** AI assistants, data analysis tools, economic dashboards, research applications, and any system that needs direct access to Spain's official statistics.
+**Perfect for:** AI assistants, data analysis tools, economic dashboards, research applications, demographic analysis, and any system that needs direct access to Spain's official statistics.
 
 Developed by [sofias tech](https://github.com/Sofias-ai/mcp-ine/).
 
@@ -90,7 +90,7 @@ This server provides a clean interface to INE's comprehensive statistical data t
 
 ### 🛠️ Available MCP Tools
 
-The server implements **18+ comprehensive tools** organized by category:
+The server implements **33 comprehensive tools** organized by category:
 
 #### 🔍 **Discovery & Search**
 
@@ -139,6 +139,94 @@ The server implements **18+ comprehensive tools** organized by category:
 | **`Get_All_Variables`** | List all system variables (paginated) | "Get all available variables" |
 | **`Get_Child_Values`** | Navigate hierarchical structures | "Get provinces within Madrid region" |
 | **`Get_Publications`** | List all publications | "Show INE publications" |
+
+---
+
+### 🏠 **Censo 2021 (Spain's 2021 Census)** *(NEW in v0.3.0)*
+
+Access comprehensive demographic, housing, and household data from Spain's 2021 Census through **10 specialized tools**:
+
+#### 📋 Discovery & Variables
+
+| Tool | Purpose | Example Usage |
+|------|---------|---------------|
+| **`Censo_List_Tables`** | List all available census tables | "What census tables are available?" |
+| **`Censo_List_Variables`** | Get variables for grouping/aggregation | "Show variables for the persons table" |
+
+#### 👥 Population Data
+
+| Tool | Purpose | Example Usage |
+|------|---------|---------------|
+| **`Censo_Get_Data`** | Flexible census queries with custom grouping | "Get population by CCAA and sex" |
+| **`Censo_Population_By_Location`** | Population by geographic level | "Population by autonomous community" |
+| **`Censo_Population_Pyramid`** | Age/sex distribution for pyramids | "Get population pyramid data" |
+| **`Censo_Nationality`** | Population by nationality/origin | "Show Spanish vs foreign population" |
+| **`Censo_Education_Level`** | Population by educational attainment | "Education levels by region" |
+
+#### 🏡 Housing & Households
+
+| Tool | Purpose | Example Usage |
+|------|---------|---------------|
+| **`Censo_Housing_By_Tenure`** | Dwellings by ownership status | "Rented vs owned housing by CCAA" |
+| **`Censo_Households_By_Size`** | Households by number of members | "How many single-person households?" |
+| **`Censo_Family_Nuclei`** | Family structure data | "Couples with/without children stats" |
+
+#### 🗺️ Geographic Levels
+
+All Censo tools support multiple geographic levels:
+- **N1**: Comunidad Autónoma (Autonomous Community) - 19 regions
+- **N2**: Provincia (Province) - 52 provinces
+- **N3**: Municipio (Municipality) - 8,000+ municipalities
+
+#### 💡 Censo 2021 Usage Examples
+
+**Natural Language Queries:**
+```
+"¿Cuántos habitantes tiene cada comunidad autónoma?"
+"Show me housing ownership rates by province"
+"Get population pyramid for Spain"
+"How many single-parent families are there?"
+"What's the education level distribution in Cataluña?"
+```
+
+**Programmatic Usage:**
+```python
+from mcp_ine.tools import (
+    Censo_List_Tables,
+    Censo_Get_Data,
+    Censo_Population_By_Location,
+    Censo_Housing_By_Tenure
+)
+
+# List available census tables
+tables = Censo_List_Tables()
+
+# Get population by autonomous community and sex
+population = Censo_Get_Data(
+    tabla="per.ppal",
+    variables="ID_RESIDENCIA_N1,ID_SEXO"
+)
+
+# Get population by province
+pop_provinces = Censo_Population_By_Location(level="N2")
+
+# Housing tenure by region
+housing = Censo_Housing_By_Tenure(location_level="N1")
+```
+
+#### 📊 Available Census Tables
+
+| Table ID | Description (ES) | Description (EN) |
+|----------|------------------|------------------|
+| `per.ppal` | Total de Personas | All persons |
+| `per.ocu` | Personas en viviendas familiares | Persons in family dwellings |
+| `per.estu` | Personas en establecimientos | Persons in collective housing |
+| `hog` | Hogares | Households |
+| `nuc` | Núcleos familiares | Family nuclei |
+| `viv.fam` | Viviendas familiares | Dwellings |
+| `viv.ppal` | Ocupados 16+ años | Employed persons 16+ |
+
+---
 
 ### 📊 **Available Statistical Operations**
 

@@ -24,7 +24,8 @@ if INE_LANGUAGE not in ['ES', 'EN']:
 mcp = FastMCP(
     name="mcp_ine",
     instructions="INE (Spanish Statistical Office) public data API. Access 109+ statistical operations: "
-                 "IPC (CPI), EPA (Labor Force), Population, economic indicators."
+                 "IPC (CPI), EPA (Labor Force), Population, economic indicators. "
+                 "Also includes Censo 2021 (Census) data: population, housing, households by location."
 )
 
 def ine_request(function: str, input_param: Optional[str] = None, 
