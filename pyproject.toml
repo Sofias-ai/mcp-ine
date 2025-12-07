@@ -1,6 +1,6 @@
 [project]
 name = "mcp-ine"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP Server for INE (Spanish Statistical Office) public data API - Access 109+ statistical operations"
 readme = "README.md"
 license = "MIT"

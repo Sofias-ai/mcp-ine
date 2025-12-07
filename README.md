@@ -90,30 +90,55 @@ This server provides a clean interface to INE's comprehensive statistical data t
 
 ### 🛠️ Available MCP Tools
 
-The server implements **8 comprehensive tools** that you can use through any MCP client (Claude Desktop, custom applications, etc.):
+The server implements **18+ comprehensive tools** organized by category:
 
-#### � **Discovery & Search**
+#### 🔍 **Discovery & Search**
 
 | Tool | Purpose | Example Usage |
 |------|---------|---------------|
 | **`List_Operations`** | Browse 109+ statistical operations | "List all available operations" or "Find operations about prices" |
 | **`Search_Data`** | Search across all data by keywords | "Search for inflation data" or "Find employment statistics" |
 | **`Get_Operation_Tables`** | Get tables for a specific operation | "Show me all CPI tables" |
+| **`Get_Operation_Info`** | Detailed info about an operation | "Get details about IPC operation" |
 
-#### � **Data Access**
+#### 📊 **Data Access**
 
 | Tool | Purpose | Example Usage |
 |------|---------|---------------|
 | **`Get_Latest_Data`** | Quick access to most recent data | "Get the latest unemployment figures" |
 | **`Get_Table_Data`** | Full table data with flexible filters | "Get CPI data for the last 12 months" |
 | **`Get_Series_Data`** | Specific time series by code | "Get series IPC251856 for last 24 periods" |
+| **`Get_Operation_Data_Filtered`** | Advanced filtering with g1-g4 params | "Get CPI for Madrid, monthly variation" |
 
-#### 🎯 **Metadata & Structure**
+#### 📋 **Series & Metadata**
 
 | Tool | Purpose | Example Usage |
 |------|---------|---------------|
-| **`Get_Table_Variables`** | List variables in a table | "What variables are in table 50902?" |
-| **`Get_Variable_Values`** | Get values for a variable | "Show me all regions for variable 3" |
+| **`Get_Table_Series`** | List series codes from a table | "Get all series in table 50913" |
+| **`Get_Operation_Series`** | List series from an operation (with filters) | "Get IPC series filtered by name" |
+| **`Get_Series_Info`** | Metadata for a specific series | "Get info about series IPC251856" |
+| **`Get_Series_Values`** | Variables that define a series | "What variables define IPC251856?" |
+| **`Get_Series_Metadata_Operation`** | Series definitions without data | "Get CPI series metadata" |
+
+#### 🎯 **Variables & Structure**
+
+| Tool | Purpose | Example Usage |
+|------|---------|---------------|
+| **`Get_Table_Groups`** | Selection groups in a table | "What groups are in table 50913?" |
+| **`Get_Group_Values`** | Values for a specific group | "Get values for group 110541" |
+| **`Get_Variable_Values`** | All values for a variable | "Show all provinces (variable 115)" |
+| **`Get_Operation_Variables`** | Variables used in an operation | "What variables does IPC use?" |
+| **`Get_Variable_Values_Operation`** | Variable values within an operation | "Get ECOICOP groups for IPC" |
+
+#### 📚 **Reference Data**
+
+| Tool | Purpose | Example Usage |
+|------|---------|---------------|
+| **`Get_Periodicities`** | List all periodicities | "What periodicities are available?" |
+| **`Get_Classifications`** | List all classifications | "Show available classifications" |
+| **`Get_All_Variables`** | List all system variables (paginated) | "Get all available variables" |
+| **`Get_Child_Values`** | Navigate hierarchical structures | "Get provinces within Madrid region" |
+| **`Get_Publications`** | List all publications | "Show INE publications" |
 
 ### 📊 **Available Statistical Operations**
 
@@ -237,6 +262,7 @@ from mcp_ine.tools import (
     List_Operations, 
     Get_Latest_Data,
     Get_Table_Data,
+    Get_Operation_Data_Filtered,
     Search_Data
 )
 
@@ -250,8 +276,17 @@ cpi_latest = Get_Latest_Data(operation_code="IPC")
 # Get historical data
 cpi_history = Get_Table_Data(
     table_id=50902, 
-    last_periods=12,
-    period_type="M"
+    last_periods=12
+)
+
+# Advanced filtering: CPI for Madrid, monthly variation, all ECOICOP groups
+cpi_madrid = Get_Operation_Data_Filtered(
+    operation_code="IPC",
+    periodicity=1,
+    filter_g1="115:29",   # Province: Madrid
+    filter_g2="3:84",     # Type: Monthly variation
+    filter_g3="762:",     # All ECOICOP groups
+    last_periods=12
 )
 ```
 
@@ -276,10 +311,28 @@ https://servicios.ine.es/wstempus/js/{language}/{function}/{input}?{parameters}
 
 ### Common Parameters
 
-- `nult`: Last N periods (e.g., `nult=12` for last 12 months)
-- `tip`: Period type - `A` (annual), `M` (monthly), `AM` (both)
-- `det`: Detail level 0-3 (default: 1)
-- `date`: Date range `YYYYMMDD:YYYYMMDD`
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `nult` | Last N periods | `nult=12` for last 12 months |
+| `det` | Detail level (0, 1, or 2) | `det=2` for full metadata |
+| `date` | Date range | `20240101:20241231` |
+| `p` | Periodicity filter | `p=1` for monthly |
+| `page` | Pagination (500 results/page) | `page=2` |
+
+### Advanced Filtering (g1-g4 parameters)
+
+For precise data queries, use filter parameters in `variable_id:value_id` format:
+
+```
+g1=115:29     → Province: Madrid (variable 115, value 29)
+g2=3:84       → Data type: Monthly variation (variable 3, value 84)
+g3=762:       → All ECOICOP groups (variable 762, all values)
+```
+
+**Example:** Get CPI for Madrid, monthly variation, food products:
+```
+DATOS_METADATAOPERACION/IPC?g1=115:29&g2=3:84&g3=762:239699&p=1&nult=12
+```
 
 ### Response Format
 
@@ -525,6 +578,25 @@ This runs 100+ tests covering all tools and edge cases.
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) file for details.
+
+## 📋 Changelog
+
+### v0.2.0 (December 2025)
+- **18+ tools** with complete INE API coverage
+- Added `Get_Operation_Data_Filtered` with g1-g4 advanced filtering
+- Added `Get_Table_Series` for listing series codes from tables
+- Added `Get_Operation_Info` for detailed operation metadata
+- Added `Get_Operation_Series` with name/periodicity filters and pagination
+- Added `Get_Series_Info`, `Get_Series_Values` for series metadata
+- Added `Get_Operation_Variables`, `Get_Variable_Values_Operation`
+- Added `Get_Periodicities`, `Get_Classifications`, `Get_All_Variables`, `Get_Child_Values`
+- Fixed `Get_Table_Groups` (corrected endpoint from VARIABLES_TABLA to GRUPOS_TABLA)
+- Fixed `Get_Variable_Values` parameter format
+- Reduced logging noise (no more stderr warnings)
+
+### v0.1.0 (November 2025)
+- Initial release with 8 basic tools
+- Support for List_Operations, Search_Data, Get_Table_Data, Get_Series_Data
 
 ## 🙏 Acknowledgments
 
